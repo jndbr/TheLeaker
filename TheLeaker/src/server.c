@@ -7,6 +7,10 @@
 #include "icmphdr.h"
 #include "iphdr.h"
 
+int isValidIp(char *ip){
+	struct sockaddr_in s;
+	return (inet_pton(AF_INET, ip, &(s.sin_addr)) != 0);
+}
 int main(int argc, char **argv){
 	FILE *leaked_file;
 	int sockfd, bytes;
@@ -15,10 +19,17 @@ int main(int argc, char **argv){
 	struct sockaddr_in from;
 	struct iphdr *ip;
 	struct icmphdr *icmp;
-	char *local_ip = "127.0.01";
 	char filename[255];
 	char relative_path[500];
 	from_len = sizeof(from);
+	if(argc < 2){
+		printf("Please inform your local ip.\n");
+		return 1;
+	}
+	char *local_ip = argv[1];
+	if(!isValidIp(local_ip)){
+		return 1;
+	}
 	sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
 	if(sockfd == -1){
 		perror("socket() Failed");
